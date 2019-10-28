@@ -32,6 +32,7 @@ the equation true. For this lab you will be using the check_vector_span function
 
 # Makes Python package NumPy available using import method
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Creates matrix t (right side of the augmented matrix).
 t = np.array([4, 11])
@@ -58,9 +59,10 @@ def check_vector_span(set_of_vectors, vector_to_check):
     # Solves for the scalars that make the equation true if vector is within the span
     try:
         # TODO: Use np.linalg.solve() function here to solve for vector_of_scalars
-        vector_of_scalars = None
+        vector_of_scalars = np.linalg.solve(set_of_vectors, vector_to_check)
         if not (vector_of_scalars is None):
             print("\nVector is within span.\nScalars in s:", vector_of_scalars)
+
     # Handles the cases when the vector is NOT within the span
     except Exception as exception_type:
         if str(exception_type) == "Singular matrix":
@@ -87,3 +89,24 @@ t3 = np.array([6, 10])
 print("\nNew Vectors:\n Matrix vw3:", vw3, "\nVector t3:", t3, sep="\n")
 # Call to check_vector_span
 s3 = check_vector_span(vw3, t3)
+
+
+"""
+Graphical solution 
+"""
+
+plt.plot([4,0],[0,2],'b',linewidth=3)
+plt.plot([3.6667,0],[0,2.2],'c-.',linewidth=3)
+plt.plot([2],[1],'ro',linewidth=3)
+plt.xlabel('Single Solution')
+plt.show()
+
+plt.plot([6,0],[0,3],'b',linewidth=5)
+plt.plot([1,4,6,0],[2.5,1,0,3],'c-.',linewidth=2)
+plt.xlabel('Redundant Equations')
+plt.show()
+
+plt.plot([10,0],[0,5],'b',linewidth=3)
+plt.plot([0,6],[3,0],'c-.',linewidth=3)
+plt.xlabel('No Solution')
+plt.show()
